@@ -1,0 +1,58 @@
+:root {
+    --bg-color: #0F1E2D;
+    --card-bg: #1A2E44;
+    --gold: #D9A74A;
+    --blue: #0B69A3;
+    --text-white: #FFFFFF;
+    --text-dim: rgba(255, 255, 255, 0.7);
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: 'Segoe UI', sans-serif;
+}
+
+body {
+    background-color: var(--bg-color);
+    color: var(--text-white);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+}
+
+.app-container {
+    width: 100%;
+    max-width: 400px;
+    height: 90vh;
+    padding: 20px;
+}
+
+.header { text-align: center; margin-bottom: 50px; }
+.logo { font-size: 48px; color: var(--gold); letter-spacing: 4px; }
+.view { display: none; flex-direction: column; }
+.view.active { display: flex; }
+
+.friend-btn {
+    background-color: var(--blue);
+    color: white;
+    padding: 18px;
+    border-radius: 12px;
+    border: none;
+    margin-bottom: 12px;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.challenge-card {
+    background-color: var(--card-bg);
+    border: 1px solid var(--gold);
+    border-radius: 20px;
+    padding: 30px;
+}
+
+.score-row { display: flex; justify-content: space-around; align-items: center; }
+.score { font-size: 42px; font-weight: bold; }
+.back-link { color: var(--gold); margin-top: 20px; cursor: pointer; background: none; border: none; }
