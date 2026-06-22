@@ -5,9 +5,10 @@ import { createChallenge, subscribeToChallenge } from './src/services/challengeS
 import ChallengeCard from './src/components/ChallengeCard';
 
 export default function App() {
-  // Simulating logged-in user as "user_alex"
-  const currentUserId = "user_alex"; 
-  const friendId = "user_sam";
+  // Simulating logged-in user as "user_ryan"
+  const currentUserId = "user_ryan"; 
+  const friendId = "user_yannick";
+  const friendId = "user_nathanel";
 
   const [activeChallengeId, setActiveChallengeId] = useState(null);
   const [challengeData, setChallengeData] = useState(null);
