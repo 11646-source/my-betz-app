@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BETZ | Home of Friendly Challenges</title>
+    <!-- Link to your CSS file -->
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="app-container">
+        <div class="header">
+            <h1 class="logo">BETZ</h1>
+            <p class="tagline">Home of Friendly Challenges</p>
+        </div>
+
+        <div id="home-view" class="view active">
+            <h2 class="section-title">Challenge a Friend</h2>
+            <button class="friend-btn" onclick="startChallenge('Yannick')">🔥 Start Battle with Yannick</button>
+            <button class="friend-btn" onclick="startChallenge('Nathanel')">🔥 Start Battle with Nathanel</button>
+            <button class="friend-btn" onclick="startChallenge('Sam')">🔥 Start Battle with Sam</button>
+        </div>
+
+        <div id="battle-view" class="view">
+            <div class="challenge-card">
+                <span class="status-badge">LIVE BATTLE</span>
+                <div class="score-row">
+                    <div class="player">
+                        <p class="player-label">YOU</p>
+                        <p class="score">0</p>
+                    </div>
+                    <div class="vs-divider">VS</div>
+                    <div class="player">
+                        <p id="opponent-name" class="player-label">OPPONENT</p>
+                        <p class="score">0</p>
+                    </div>
+                </div>
+            </div>
+            <button class="back-link" onclick="goBack()">← Back to Friends</button>
+        </div>
+    </div>
+
+    <script>
+        function startChallenge(name) {
+            document.getElementById('home-view').classList.remove('active');
+            document.getElementById('battle-view').classList.add('active');
+            document.getElementById('opponent-name').innerText = name.toUpperCase();
+        }
+        function goBack() {
+            document.getElementById('battle-view').classList.remove('active');
+            document.getElementById('home-view').classList.add('active');
+        }
+    </script>
+</body>
+</html>
