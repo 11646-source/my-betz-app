@@ -1,56 +1,38 @@
 import React from 'react';
-import { View, Text, TouchableOpacity, StyleSheet } from 'react-native';
-import { updatePushUpScore } from '../services/challengeService';
+import { View, Text, StyleSheet } from 'react-native';
 
-export default function ChallengeCard({ challenge, currentUserId }) {
-  if (!challenge) return null;
-
-  const myScore = challenge.scores[currentUserId] || 0;
-  
-  // Find opponent's ID dynamically from the scores object
-  const opponentId = Object.keys(challenge.scores).find(id => id !== currentUserId);
-  const opponentScore = challenge.scores[opponentId] || 0;
-
-  const handlePushUp = () => {
-    // Increment the current user's score by 1 in the backend
-    updatePushUpScore(challenge.id, currentUserId, myScore + 1);
-  };
+const ChallengeCard = ({ challenge, currentUserId }) => {
+  if (!challenge) return <Text style={{color: '#fff'}}>Loading Battle...</Text>;
 
   return (
     <View style={styles.card}>
-      <Text style={styles.title}>PHYSICAL CHALLENGE</Text>
-      <Text style={styles.subtitle}>Who can do more push-ups?</Text>
-      
+      <Text style={styles.statusLabel}>{challenge.status.toUpperCase()}</Text>
       <View style={styles.scoreRow}>
-        <View style={styles.scoreBox}>
-          <Text style={styles.scoreLabel}>You</Text>
-          <Text style={styles.scoreNumber}>{myScore}</Text>
+        <View style={styles.player}>
+          <Text style={styles.playerName}>YOU</Text>
+          <Text style={styles.score}>{challenge.scores[currentUserId]}</Text>
         </View>
-        
         <Text style={styles.vs}>VS</Text>
-        
-        <View style={styles.scoreBox}>
-          <Text style={styles.scoreLabel}>Friend</Text>
-          <Text style={styles.scoreNumber}>{opponentScore}</Text>
+        <View style={styles.player}>
+          <Text style={styles.playerName}>OPPONENT</Text>
+          <Text style={styles.score}>
+             {/* Find the score that isn't the current user */}
+             {Object.values(challenge.scores).find(s => s !== challenge.scores[currentUserId]) || 0}
+          </Text>
         </View>
       </View>
-
-      <TouchableOpacity style={styles.button} onPress={handlePushUp}>
-        <Text style={styles.buttonText}>+1 PUSH UP! 💪</Text>
-      </TouchableOpacity>
     </View>
   );
-}
+};
 
 const styles = StyleSheet.create({
-  card: { backgroundColor: '#FFF', padding: 20, borderRadius: 12, width: '90%', alignSelf: 'center', marginVertical: 10, shadowColor: '#000', shadowOffset: { width: 0, height: 2 }, shadowOpacity: 0.1, shadowRadius: 4, elevation: 3 },
-  title: { fontSize: 18, fontWeight: 'bold', color: '#102A43', textAlign: 'center' },
-  subtitle: { fontSize: 14, color: '#627D98', textAlign: 'center', marginBottom: 15 },
-  scoreRow: { flexDirection: 'row', justifyContent: 'space-around', alignItems: 'center', marginBottom: 20 },
-  scoreBox: { alignItems: 'center' },
-  scoreLabel: { fontSize: 14, color: '#486581' },
-  scoreNumber: { fontSize: 32, fontWeight: 'bold', color: '#0B69A3' },
-  vs: { fontSize: 18, fontWeight: 'bold', color: '#BCCCDC' },
-  button: { backgroundColor: '#D9A74A', paddingVertical: 12, borderRadius: 8, alignItems: 'center' },
-  buttonText: { color: '#FFF', fontWeight: 'bold', fontSize: 16 }
+  card: { backgroundColor: '#1A2E44', padding: 20, borderRadius: 15, borderWidth: 1, borderColor: '#D9A74A' },
+  statusLabel: { color: '#D9A74A', textAlign: 'center', fontWeight: '800', marginBottom: 10 },
+  scoreRow: { flexDirection: 'row', justifyContent: 'space-around', alignItems: 'center' },
+  player: { alignItems: 'center' },
+  playerName: { color: '#FFF', fontSize: 12, opacity: 0.7 },
+  score: { color: '#FFF', fontSize: 32, fontWeight: 'bold' },
+  vs: { color: '#D9A74A', fontWeight: 'bold' }
 });
+
+export default ChallengeCard;
